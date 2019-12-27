@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="font_1459788_hptfyoby7ch/iconfont.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/banner.js"></script>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="logo-bg">
+            <div class="head-logo">
+                <a href="#">
+                    <img src="http://image2.suning.cn/uimg/cms/img/157718657842360318.jpg" alt="">
+                </a>
+            </div>
+        </div>
+        <span class="off-logo"></span>
+        <script>
+            //logo广告开关
+            $(".off-logo").click(function (e) {
+                $(this).toggleClass("off-logo-bg");
+                console.log($(this).siblings(".logo-bg"));
+                $(this).siblings(".logo-bg").toggle();
+            });
+        </script>
+        <div class="head-reg-box">
+            <div class="head-reg">
+                <div class="head-reg-left">
+                    <div class="wzdh">
+                        <a href="#">网站导航
+                            <div class="wzdh-nav" style="display: none;"></div>
+                        </a>
+                        <span class="iconfont icon-icon icon1"></span>
+                    </div>
+                    <div class="wzdh">
+                        <a href="#">商家入驻
+                            <div class="wzdh-nav" style="display: none;"></div>
+                        </a>
+                        <span class="iconfont icon-icon icon2"></span>
+                    </div>
+                    <div class="wzdh">
+                        <a class="left-a" href="#">客户服务
+                            <div class="wzdh-nav wzdh_left_box" style="display: none;"></div>
+                        </a>
+                        <span class="iconfont icon-icon icon3"></span>
+                    </div>
+                    <div>
+                        <a href="#">广州
+                            <div class="wzdh-nav" style="display: none;"></div>
+                        </a>
+                        <span class="iconfont icon-icon icon4"></span>
+                    </div>
+                </div>
+                <div class="head-reg-right">
+                    <div>
+                        <a href="#">请登录
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#">注册有礼
+                        </a>
+                    </div>
+                    <div class="wzdh">
+                        <a href="#">我的订单
+                            <div class="wzdh-nav" style="display: none;"></div>
+                        </a>
+                        <span class="iconfont icon-icon icon5"></span>
+                    </div>
+                    <div class="wzdh">
+                        <a href="#">我的易购
+                            <div class="wzdh-nav" style="display: none;"></div>
+                        </a>
+                        <span class="iconfont icon-icon icon6"></span>
+                    </div>
+                    <div>
+                        <a href="#">苏宁会员
+                        </a>
+                    </div>
+                    <div class="wzdh">
+                        <a href="#">购物车
+                            <div class="wzdh-nav" style="display: none;"></div>
+                        </a>
+                        <span class="iconfont icon-icon icon7"></span>
+                    </div>
+                    <div>
+                        <a href="#">易付宝
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#">企业采购
+                        </a>
+                    </div>
+                    <div class="wzdh">
+                        <a href="#">手机苏宁
+                            <div class="wzdh-nav wzdh_right_box" style="display: none;"></div>
+                        </a>
+                        <span class="iconfont icon-icon icon8"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(".wzdh a").hover(function () {
+                $(this).children("div").stop().slideToggle(100);
+                $(this).siblings("span").addClass("icon-rotate").siblings().removeClass("icon-rotate");
+            })
+            $(".wzdh a").mouseout(function () {
+                $(this).siblings("span").removeClass("icon-rotate");
+            })
+        </script>
+        <div class="headCon">
+            <div class="headConLeft">
+                <img src="images/155540698836163295.png" style="width: 190px;height: 90px;" alt="">
+            </div>
+            <div class="headConCenter">
+                <img src="images/157727200648469529.gif" alt="">
+            </div>
+            <div class="headConRight">
+                <div class="head-input-box news">
+                    <span class="iconfont icon-sousuo"></span><input id="inputID" class="field" type="text"><input
+                        class="btn" type="button" value="搜&nbsp;索">
+                    <ul id="list" style="display: none;"></ul>
+
+                    <script>
+                        function fn(o) {
+                            /* 005-把内容显示在页面中 */
+                            // console.log(o.words);
+                            let data = o.words || [];
+                            // console.log(data);
+                            let html = data.map(ele => `<li>${ele.keyname}</li>`).join("");
+                            // console.log(html, $("#list"));
+
+                            $("#list").html(html);
+                        }
+                    </script>
+                    <script>
+                        $(() => {
+                            // https://ds.suning.com/ds/his/new/-三只松鼠-0-1_0-autoComplateCallback_184b31b125a59d8c382d3d8382d23350
+                            /* 001-先获取标签 */
+                            /* 002-监听输入框的input事件 */
+                            $("#inputID").on(" input propertychange", function () {
+                                /* 003-当事件触发的时候，获取输入框的内容 */
+                                let val = this.value;
+                                // console.log(val);
+
+                                /* 004-利用jsonP去发请求获取百度搜索的内容 */
+                                /* 先检查页面中这个标签是否已经存在，如果已经存在那么就删掉它 */
+
+                                if ($("#testID")) {
+                                    $("#testID").remove();
+                                }
+
+                                oScript = document.createElement("script");
+                                oScript.id = "testID";
+                                oScript.setAttribute("src",
+                                    `https://ds.suning.com/ds/his/new/-${val}-0-1_0-fn.jsonp?callback=fn`
+                                );
+                                document.body.appendChild(oScript);
+                            })
+                            $("#inputID").blur(function (e) {
+                                $(this).siblings("#list").slideToggle(100);
+                            });
+
+                            $("#inputID").focus(function (e) {
+                                $(this).siblings("#list").slideToggle(100);
+                            });
+                        })
+
+
+                        // $(() => {
+                        //     $("#inputID").on(" input propertychange", function () {
+                        //         console.log($("#inputID").val());
+                        //         $.ajax({
+                        //             type: "get",
+                        //             url: `https://ds.suning.com/ds/his/new/-冰箱-0-1_0-autoComplateCallback_184b31b125a59d8c382d3d8382d23350`,
+                        //             dataType : "jsonp",//数据类型为jsonp  
+                        //             jsonp: "autoComplateCallback_184b31b125a59d8c382d3d8382d23350",//服务端用于接收callback调用的function名的参数
+                        //             success: function (response) {
+                        //                 console.log(response);
+                        //             }
+                        //         })
+                        //     })
+                        // })
+                    </script>
+                </div>
+                <div class="headSmallNews">
+                    <a href="#">手机</a>
+                    <a href="#">电视</a>
+                    <a href="#">手机</a>
+                    <a href="#">手机</a>
+                    <a href="#">手机</a>
+                    <a href="#">手机</a>
+                    <a href="#">手机</a>
+                    <a href="#">手机</a>
+                    <a href="#">手机</a>
+                    <a href="#">手机</a>
+                </div>
+            </div>
+        </div>
+        <div class="headNavBox">
+            <h6>
+                <i></i>
+                <span>全部商品分类</span>
+            </h6>
+            <ul>
+                <li><a href="#">限时抢购</a><span></span> </li>
+                <li><a href="#">红孩子</a><span></span> </li>
+                <li><a href="#">苏宁超市</a><span></span> </li>
+                <li><a href="#">电器城</a><span></span> </li>
+                <li><a href="#">生活家电</a><span></span> </li>
+                <li><a href="#">时尚服饰</a><span></span> </li>
+                <li><a href="#">苏宁国际</a><span></span> </li>
+                <li><a href="#">苏宁Outlets</a><span></span> </li>
+                <li><a href="#">金融</a><span></span> </li>
+            </ul>
+            <div>
+                <img src="images/156810604991255454.png" style="width: 170px;height: 38px;" alt="">
+            </div>
+        </div>
+        <script>
+            $(".headNavBox ul li").hover(function () {
+                $(this).children("span").stop().slideToggle();
+            })
+        </script>
+    </header>
+    <header class="banner">
+        <div class="banner-bg">
+            <img class="banner-bg-left-img" src="images/157726695601353564.png" alt="">
+            <img class="banner-bg-right-img" src="images/157726697753344828.png" alt="">
+        </div>
+        <div class="banner-nav">
+            <ul class="banner-nav-box">
+
+            </ul>
+            <div class="box news"></div>
+        </div>
+
+        <script>
+            $.getJSON("http://127.0.0.1/code/src/suning/server/suning-index.json",
+                function (data, textStatus, jqXHR) {
+                    // console.log(data);
+                    //左侧栏渲染
+                    let oUl = data.map(function (e, i) {
+                        // console.log(e.liName);
+                        let oLi = e.liName.map(function (ele, index) {
+                            return `<a href="">${ele}</a><em style="display: ${index==e.liName.length-1?"none":"inline-block;"};"></em>`
+                        }).join("")
+                        // console.log(oLi);
+                        return `<li>${oLi}</li>`
+                    }).join("")
+                    // console.log(oUl);
+                    $(".banner-nav-box").html(oUl);
+                    let html = data.map(function (e, i) {
+                        let oA = e.btn.map(function (ele) {
+                            return `<a href="#">${ele}</a>`
+                        }).join("")
+                        let oDt = e.list.map(function (ele, index) {
+                            if (index == 0) {
+                                return `<dt><a href="#">${ele}</a></dt>`
+                            }
+
+                        }).join("")
+                        let oDd = e.list.map(function (ele, index) {
+                            if (index < 11) {
+                                return ` 
+                            <a href="#">${ele}</a>
+                            `
+                            }
+
+                        }).join("")
+                        let oImg1 = e.src.map(function (ele, index) {
+                            if (index < 8) {
+                                return ` 
+                                <a href="#"><img src=${ele}
+                                style="width: 80px;height: 30px;" alt=""></a>
+                            `
+                            }
+
+                        }).join("")
+                        let oImg2 = e.src.map(function (ele, index) {
+                            if (index >= 8) {
+                                return ` 
+                                <a href="#"><img src=${ele}
+                                style="width: 180px;height: 100px;" alt=""></a>
+                            `
+                            }
+
+                        }).join("")
+                        return `
+                                    <div class="banner-nav-box2" style="display:none">
+                                <div class="btn-box">
+                                    ${oA}
+                                </div>
+                            <div class="list-box">
+                                <dl>
+                                    ${oDt}
+                                    <dd>
+                                        ${oDd}
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="right-box">
+                                <div class="right-box-top">
+                                    ${oImg1}
+                                </div>
+                                <div class="right-box-bottom">
+                                    ${oImg2}
+                                </div>
+                            </div>
+                        </div>
+                    `
+                    }).join("")
+                    // console.log(html);
+                    $(".banner-nav").append(html);
+                });
+            $(() => {
+                $(".banner-nav-box li").mouseover(function () {
+                    $(this).parent().siblings(".banner-nav-box2").eq($(this).index()).stop().show();
+                }).mouseout(function () {
+                    $(this).parent().siblings(".banner-nav-box2").eq($(this).index()).stop().hide();
+                });
+            })
+        </script>
+    </header>
+    <div class="main">
+        <div class="floor news">
+            <div class="floorBox">
+                
+                <script>
+                    let html = $.getJSON("http://127.0.0.1/code/suning/src/server/fooer.json",
+                        function (data, textStatus, jqXHR) {
+                            // console.log(data);
+                            let html = data.map(function (ele, index) {
+                                // console.log(ele.keyword);
+                                let titleRight = ele.keyword.map(function (e, i) {
+                                    return `<a href="#">${e}</a>`
+
+                                }).join("")
+                                let imgname2 = ele.imgname2.map(function (e, i) {
+                                    return `  
+                                        <p>${e}</p>                       
+                                        `
+                                }).join(",")
+                                let imgdesc2 = ele.imgdesc2.map(function (e, i) {
+                                    return `  
+                                        <p>${e}</p>                      
+                                        `
+                                }).join(",")
+                                let ilistimg = ele.listimg.map(function (e, i) {
+                                    return `  
+                                    <img class="whImg"
+                                    src=${e} alt="">                      
+                                        `
+                                }).join(",")
+                                // console.log(imgname2.split(",")[0]);
+                                let oLi1 = ele.listimg.map(function (e, i) {
+                                    return `
+                                    <li>
+                                        <a href="#">
+                                            ${imgname2.split(",")[i]}
+                                            ${imgdesc2.split(",")[i]}
+                                            ${ilistimg.split(",")[i]}
+                                        </a>
+                                    </li> 
+                                    `
+                                }).join("")
+
+                                let imgname3 = ele.imgname3.map(function (e, i) {
+                                    return `  
+                                        <p>${e}</p>                       
+                                        `
+                                }).join(",")
+                                let imgdesc3 = ele.imgdesc3.map(function (e, i) {
+                                    return `  
+                                        <p>${e}</p>                      
+                                        `
+                                }).join(",")
+                                let bottomlistimg = ele.bottomlistimg.map(function (e, i) {
+                                    return `  
+                                    <img class="whImg"
+                                    src=${e} alt="">                      
+                                        `
+                                }).join(",")
+
+                                let oLi2 = ele.bottomlistimg.map(function (e, i) {
+                                    return `
+                                    <li>
+                                        <a href="#">
+                                            ${imgname3.split(",")[i]}
+                                            ${imgdesc3.split(",")[i]}
+                                            ${bottomlistimg.split(",")[i]}
+                                        </a>
+                                    </li>
+                                   `
+                                }).join("")
+
+                                let oLi3 = ele.logo.map(function (e, i) {
+                                    return `<li><img class="whImg" src=${e} alt=""></li>`
+                                }).join("")
+
+                                return `
+                    <div class="floorBoxLeft">
+                    <div class="title">
+                        <div class="titleName">
+                            <span></span>
+                            <p>${ele.titlename}</p>
+                            <img src="https://image4.suning.cn/uimg/cms/img/154653217049726572.png" alt="">
+                        </div>
+                        <div class="titleRight">
+                            ${titleRight}
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="left-img">
+                            <img src=${ele.leftimg} alt="">
+                            <div></div>
+                            <p>${ele.imgname}</p>
+                            <p>${ele.imgdesc}</p>
+                            <a href=""></a>
+                        </div>
+                        <ul>
+                            ${oLi1}
+                        </ul>
+                    </div>
+                    <div class="list">
+                        <ul>
+                            ${oLi2}
+                        </ul>
+                    </div>
+                    <div class="logo">
+                        <ul>
+                            ${oLi3}
+                        </ul>
+                    </div>
+                </div>
+                    `
+                            }).join("")
+                            $(".floorBox").append(html);
+                        }
+                    );
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+</body>
+
+</html>
